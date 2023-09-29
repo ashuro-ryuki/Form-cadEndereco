@@ -27,6 +27,10 @@ const pesquisarCep = async() => {
     if(cepValido(cep.value)){
         const dados = await fecth(url); //esperar 
         const addres = await dados.json();
+        
+        if(addres.hasOwnPerty('erro')){
+            alert ('cep não encontrado');
+        }
     }
 //fetch == comando p/ acessar a API
 }
