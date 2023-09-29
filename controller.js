@@ -15,8 +15,18 @@ const eNumero = (numero) => /^[0-9]+$/.test(numero);// testa numero infromado co
  
 //função para preencher fomrulario
 const  preencherFormulario = (endereco) => {
-   document.getElementById('rua').value = endereco.logadouro
+   document.getElementById('rua').value = endereco.logradouro
    document.getElementById('bairro').value = endereco.bairro
    document.getElementById('estado').value = endereco.uf
    document.getElementById('cidade').value = endereco.localidade
+}
+//consumo da API da viaCEP
+const pesquisarCep = async() => {
+    limparFormulario();
+    const url = `http://viacep.com.br/ws/${cep.value}/json/`;
+    if(cepValido(cep.value)){
+        const dados = await fecth(url); //esperar 
+        const addres = await dados.json();
+    }
+//fetch == comando p/ acessar a API
 }
