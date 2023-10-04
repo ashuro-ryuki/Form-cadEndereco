@@ -9,7 +9,7 @@ const limparFormulario = () => {
   document.getElementById('bairro').value = '';
   document.getElementById('estado').value = '';
   document.getElementById('cidade').value = '';
-};
+}
 
 // Verifica se CEP é válido
 const eNumero = (numero) => /^[0-9]+$/.test(numero); // Testa número informado com expressão regular
@@ -21,24 +21,24 @@ const preencherFormulario = (endereco) => {
   document.getElementById('bairro').value = endereco.bairro;
   document.getElementById('cidade').value = endereco.localidade;
   document.getElementById('estado').value = endereco.uf;
-};
+}
 
 // Consumo da API da ViaCEP
-const pesquisarCep = async () => {
+const pesquisarCep = async() => {
   limparFormulario();
   const url = `https://viacep.com.br/ws/${cep.value}/json/`;
   if (cepValido(cep.value)) {
     const dados = await fetch(url); // Esperar
-    const endereco = await dados.json();
-    if (endereco.erro) {
+    const address = await dados.json();
+    if (address.hasOwnProperty('erro')) {
       alert('CEP não encontrado');
     } else {
-      preencherFormulario(endereco);
+      preencherFormulario(address);
     }
   } else {
     alert('CEP incorreto');
   }
-};
+}
 
 // Adiciona evento DOM ao input do CEP para executar função pesquisarCep
 document.getElementById('cep').addEventListener('focusout', pesquisarCep);
